@@ -1,0 +1,43 @@
+---
+// Shows a public view count from GoatCounter.
+//   <ViewCount />              → views of the current page
+//   <ViewCount total />        → views of the whole site
+// Renders nothing until GoatCounter is configured in src/site.config.ts.
+import { GOATCOUNTER } from '../site.config';
+
+interface Props {
+  total?: boolean;
+  label?: string;
+}
+const { total = false, label = 'views' } = Astro.props;
+const enabled = Boolean(GOATCOUNTER.code && GOATCOUNTER.showPublicCounts);
+---
+
+{
+  enabled && (
+    <span
+      class="view-count"
+      data-gc-code={GOATCOUNTER.code}
+      data-gc-total={total ? '1' : undefined}
+      data-gc-label={label}
+      hidden
+    />
+  )
+}
+
+<script>
+  async function load(el: HTMLElement) {
+    const { gcCode, gcTotal, gcLabel } = el.dataset;
+    const path = gcTotal ? 'TOTAL' : encodeURIComponent(location.pathname);
+    try {
+      const res = await fetch(`https://${gcCode}.goatcounter.com/counter/${path}.json`);
+      // 404 = no recorded views yet
+      const count = res.ok ? (await res.json()).count : '0';
+      el.textContent = `${count} ${gcLabel}`;
+      el.hidden = false;
+    } catch {
+      /* blocked by an ad-blocker or offline — just stay hidden */
+    }
+  }
+  document.querySelectorAll<HTMLElement>('.view-count').forEach(load);
+</script>

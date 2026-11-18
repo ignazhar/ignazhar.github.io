@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import { SITE, GOATCOUNTER } from '../site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.tagline } = Astro.props;
+const fullTitle = title ? `${title} — ${SITE.name}` : SITE.name;
+const path = Astro.url.pathname;
+const nav = [
+  { label: 'Blog', href: '/blog/' },
+  { label: 'About', href: '/about/' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <slot name="head" />
+    {
+      GOATCOUNTER.code && (
+        <script
+          is:inline
+          async
+          data-goatcounter={`https://${GOATCOUNTER.code}.goatcounter.com/count`}
+          src="https://gc.zgo.at/count.js"
+        />
+      )
+    }
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="site-header">
+        <a class="name" href="/">{SITE.name}</a>
+        <nav>
+          {
+            nav.map((item) => (
+              <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        <span>© {new Date().getFullYear()} {SITE.name}</span>
+        <span class="links">
+          {SITE.links.map((l) => <a href={l.href}>{l.label}</a>)}
+          <a href="/rss.xml">RSS</a>
+        </span>
+      </footer>
+    </div>
+  </body>
+</html>

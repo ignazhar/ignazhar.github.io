@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import ViewCount from '../components/ViewCount.astro';
+import { SITE } from '../site.config';
+import { getPosts, formatDate } from '../lib/posts';
+
+const recent = (await getPosts()).slice(0, 5);
+---
+
+<Base>
+  <h1>Hi, I’m {SITE.name}.</h1>
+  <p class="muted">{SITE.tagline}</p>
+
+  <h2 class="section-title">Recent writing</h2>
+  <ul class="post-list">
+    {
+      recent.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, 'short')}</time>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="small"><a href="/blog/">All posts →</a></p>
+
+  <p class="small muted"><ViewCount total label="total visits to this site" /></p>
+</Base>

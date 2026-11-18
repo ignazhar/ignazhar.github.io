@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts, formatDate } from '../../lib/posts';
+
+const posts = await getPosts();
+const byYear = Map.groupBy(posts, (p) => p.data.date.getUTCFullYear());
+---
+
+<Base title="Blog">
+  <h1>Blog</h1>
+  {
+    [...byYear].map(([year, list]) => (
+      <>
+        <h2 class="section-title">{year}</h2>
+        <ul class="post-list">
+          {list.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`}>
+                {post.data.title}
+                {post.data.draft && <span class="muted small"> (draft)</span>}
+              </a>
+              <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, 'short')}</time>
+            </li>
+          ))}
+        </ul>
+      </>
+    ))
+  }
+</Base>
