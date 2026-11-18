@@ -6,7 +6,7 @@ Astro + Markdown. Write in Obsidian, push to GitHub, it deploys itself.
 src/
   site.config.ts        ← your name, links, GoatCounter + giscus settings
   content/blog/         ← ALL POSTS live here (open this folder in Obsidian)
-    my-post.md            → yoursite.com/blog/my-post/
+    my-post.md            → ignazhar.github.io/blog/my-post/
     images/               ← pasted photos land here
     _templates/post.md    ← Obsidian template (title, date, tags, draft)
   pages/about.md        ← About page (plain Markdown)
@@ -43,15 +43,19 @@ Frontmatter fields:
 
 The file name is the URL, so use `kebab-case.md` names.
 
-## Deploy (free) — Cloudflare Pages
+## Hosting — GitHub Pages (free)
 
-1. Push this folder to a GitHub repo.
-2. Cloudflare dashboard → Workers & Pages → Create → Pages → connect the repo.
-3. Framework preset **Astro** (build `npm run build`, output `dist`). Deploy.
-4. Add your custom domain under the project's *Custom domains* tab, then set `SITE.url`
-   in `src/site.config.ts`.
+Live at **https://ignazhar.github.io**. Every push to `master` runs
+`.github/workflows/deploy.yml`, which builds the site and publishes it (about 1–2 minutes;
+watch it in the repo's **Actions** tab).
 
-(Vercel and Netlify work the same way: import the repo, and they detect Astro.)
+One-time setup (already done if the site is live):
+
+1. The repo must be named `ignazhar.github.io` so the site is served at the root.
+2. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+Custom domain later: Settings → Pages → Custom domain, then update `SITE.url` in
+`src/site.config.ts`.
 
 ## View stats — GoatCounter
 

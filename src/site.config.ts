@@ -5,8 +5,8 @@
 export const SITE = {
   name: 'Your Name',
   tagline: 'Notes, photos and things I’m working on.',
-  // Your final URL (used for RSS + sitemap). Update once you have a domain.
-  url: 'https://example.com',
+  // Your site's URL (used for RSS + sitemap). Change it if you add a custom domain.
+  url: 'https://ignazhar.github.io',
   links: [
     { label: 'GitHub', href: 'https://github.com/your-username' },
     { label: 'Email', href: 'mailto:you@example.com' },
