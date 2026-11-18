@@ -3,6 +3,8 @@ layout: ../layouts/Page.astro
 title: About
 ---
 
+Hey! My name is Ihnat.
+
 Write a few lines about yourself here. This page is plain Markdown —
 edit `src/pages/about.md`.
 

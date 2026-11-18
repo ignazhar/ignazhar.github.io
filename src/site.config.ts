@@ -3,13 +3,14 @@
 // ─────────────────────────────────────────────────────────────
 
 export const SITE = {
-  name: 'Your Name',
+  name: 'Ihnat',
   tagline: 'Notes, photos and things I’m working on.',
   // Your site's URL (used for RSS + sitemap). Change it if you add a custom domain.
   url: 'https://ignazhar.github.io',
   links: [
-    { label: 'GitHub', href: 'https://github.com/your-username' },
-    { label: 'Email', href: 'mailto:you@example.com' },
+    { label: 'GitHub', href: 'https://github.com/ignazhar' },
+    { label: 'Email', href: 'mailto:iz238@cam.ac.uk' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ihnat-zharikhin/' }
   ],
 };
 
