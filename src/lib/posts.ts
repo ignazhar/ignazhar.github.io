@@ -6,13 +6,9 @@ export async function getPosts() {
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
-export function formatDate(date: Date, style: 'short' | 'long' = 'long') {
-  return date.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: style === 'long' ? 'long' : 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
-  });
+/** Dates are shown as 2026-11-18 (ISO), which suits the monospace look. */
+export function formatDate(date: Date) {
+  return date.toISOString().slice(0, 10);
 }
 
 export function readingTime(markdown: string | undefined) {

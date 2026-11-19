@@ -17,7 +17,7 @@ const recent = (await getPosts()).slice(0, 5);
       recent.map((post) => (
         <li>
           <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, 'short')}</time>
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
         </li>
       ))
     }

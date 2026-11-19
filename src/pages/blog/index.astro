@@ -19,7 +19,7 @@ const byYear = Map.groupBy(posts, (p) => p.data.date.getUTCFullYear());
                 {post.data.title}
                 {post.data.draft && <span class="muted small"> (draft)</span>}
               </a>
-              <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, 'short')}</time>
+              <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
             </li>
           ))}
         </ul>

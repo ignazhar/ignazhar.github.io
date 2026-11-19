@@ -22,7 +22,7 @@ const { title, date, description, cover, tags } = post.data;
     <div class="post-meta">
       <time datetime={date.toISOString()}>{formatDate(date)}</time>
       <span class="dot"></span>
-      <span>{readingTime(post.body)} min read</span>
+      <span>{readingTime(post.body)} min</span>
       <ViewCount />
     </div>
 
