@@ -10,7 +10,8 @@ export default defineConfig({
   site: SITE.url,
   integrations: [sitemap()],
   markdown: {
-    // remark lets us fix up image links that Obsidian writes when you paste a photo
+    // remark lets us fix up image links (Obsidian pastes, ![[photo.jpg]]) and find
+    // photos in the shared folder src/content/blog/images from any page or post
     processor: unified({ remarkPlugins: [remarkDecodeImagePaths] }),
   },
 });
