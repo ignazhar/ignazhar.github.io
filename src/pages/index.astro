@@ -1,15 +1,18 @@
 ---
+// Home page. The text at the top comes from src/content/home.md — edit that file,
+// not this one. Below it: recent posts and the total visit counter.
 import Base from '../layouts/Base.astro';
 import ViewCount from '../components/ViewCount.astro';
-import { SITE } from '../site.config';
+import { Content as Intro } from '../content/home.md';
 import { getPosts, formatDate } from '../lib/posts';
 
 const recent = (await getPosts()).slice(0, 5);
 ---
 
 <Base>
-  <h1>Hi, I’m {SITE.name}.</h1>
-  <p class="muted">{SITE.tagline}</p>
+  <article class="prose">
+    <Intro />
+  </article>
 
   <h2 class="section-title">Recent writing</h2>
   <ul class="post-list">
